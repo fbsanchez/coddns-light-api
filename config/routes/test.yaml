@@ -1,0 +1,4 @@
+test:
+  methods: [ GET ]
+  path: /api/test
+  controller: App\Controller\Test\TestController

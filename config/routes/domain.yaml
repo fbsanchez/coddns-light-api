@@ -1,0 +1,4 @@
+create_domain:
+  methods: [ POST ]
+  path: /api/domain
+  controller: App\Controller\Domain\CreateDomainController

@@ -1,0 +1,53 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Domain\Infrastructure\Persistence;
+
+use RuntimeException;
+use App\Domain\Domain\DomainRepository;
+use App\Domain\Domain\Model\Domain;
+use App\Shared\Infrastructure\Persistence\MysqlClient;
+
+final class MysqlDomainRepository implements DomainRepository
+{
+    private const TABLE = 'hosts';
+
+    public function __construct(
+        private readonly MysqlClient $mysqlClient,
+    )
+    {
+    }
+
+    public function add(Domain $domain): void
+    {
+        $data = $domain->toArray();
+
+        $sql = sprintf(
+            'INSERT INTO %s (%s) VALUES (%s)',
+            self::TABLE,
+            join(',', array_keys($data)),
+            join(',',
+                array_fill(0, count(array_keys($data)), '?'),
+            ),
+        );
+
+        if (false === $this->mysqlClient->set($sql, $data)) {
+            throw new RuntimeException();
+        }
+    }
+
+    public function find(): Domain
+    {
+        // TODO: Implement find() method.
+    }
+
+    public function findByNameAndUserId(string $fullDomainName, int $userId): ?Domain
+    {
+        // TODO: Implement findByNameAndUserId() method.
+    }
+
+    public function remove(Domain $domain): void
+    {
+        // TODO: Implement remove() method.
+    }
+}
