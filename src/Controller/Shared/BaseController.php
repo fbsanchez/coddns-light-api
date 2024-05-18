@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Shared;
 
-use App\Shared\Domain\Command;
+use App\Shared\Domain\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +20,7 @@ abstract class BaseController extends AbstractController
         return $this->response();
     }
 
-    public function mapCommand(array $parameters): Command
+    public function mapCommand(array $parameters): Message
     {
         $className = $this->command();
         if (

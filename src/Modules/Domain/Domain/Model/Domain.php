@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domain\Domain\Model;
+namespace App\Modules\Domain\Domain\Model;
 
-use App\Domain\Domain\Model\ValueObject\DomainNameValueObject;
+use App\Modules\Domain\Domain\Model\ValueObject\DomainNameValueObject;
 use Safe\DateTime;
 
 final class Domain

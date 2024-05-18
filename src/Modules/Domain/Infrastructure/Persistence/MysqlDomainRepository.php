@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domain\Infrastructure\Persistence;
+namespace App\Modules\Domain\Infrastructure\Persistence;
 
-use RuntimeException;
-use App\Domain\Domain\DomainRepository;
-use App\Domain\Domain\Model\Domain;
+use App\Modules\Domain\Domain\DomainRepository;
+use App\Modules\Domain\Domain\Model\Domain;
 use App\Shared\Infrastructure\Persistence\MysqlClient;
+use RuntimeException;
 
 final class MysqlDomainRepository implements DomainRepository
 {

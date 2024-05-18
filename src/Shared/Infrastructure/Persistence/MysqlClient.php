@@ -57,4 +57,9 @@ final class MysqlClient
         return $this->pdo->begin_transaction();
     }
 
+    public function escape(string $string): string
+    {
+        return $this->pdo->real_escape_string($string);
+    }
+
 }

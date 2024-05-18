@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domain\Domain;
+namespace App\Modules\Domain\Domain;
 
-use App\Domain\Domain\Model\Domain;
+use App\Modules\Domain\Domain\Model\Domain;
 
 interface DomainRepository
 {

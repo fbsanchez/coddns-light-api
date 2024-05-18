@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domain\Application\CreateDomain;
+namespace App\Modules\Domain\Application\CreateDomain;
 
-use App\Shared\Domain\Command;
+use App\Shared\Domain\Message;
 
-final class CreateDomainCommand implements Command
+final class CreateDomainMessage implements Message
 {
     public function __construct(
         public string $domainName,

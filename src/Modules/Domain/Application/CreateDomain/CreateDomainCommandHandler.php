@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domain\Application\CreateDomain;
+namespace App\Modules\Domain\Application\CreateDomain;
 
-use App\Domain\Domain\DomainRepository;
-use App\Domain\Domain\Model\Domain;
-use App\Domain\Domain\Model\ValueObject\DomainNameValueObject;
+use App\Modules\Domain\Domain\DomainRepository;
+use App\Modules\Domain\Domain\Model\Domain;
+use App\Modules\Domain\Domain\Model\ValueObject\DomainNameValueObject;
 use Safe\DateTime;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -18,7 +18,7 @@ final class CreateDomainCommandHandler
     {
     }
 
-    public function __invoke(CreateDomainCommand $command): void
+    public function __invoke(CreateDomainMessage $command): void
     {
         $this->repository->add(new Domain(
             id: 1,

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Domain\Domain\Model\ValueObject;
+namespace App\Modules\Domain\Domain\Model\ValueObject;
 
-use App\Domain\Domain\Exception\InvalidDomainNameException;
+use App\Modules\Domain\Domain\Exception\InvalidDomainNameException;
 use App\Shared\Domain\ValueObject\StringValueObject;
 use Safe\Exceptions\PcreException;
 
