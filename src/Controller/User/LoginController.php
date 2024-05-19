@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace App\Controller\User;
 
 use App\Controller\Shared\BaseController;
-use App\Modules\Domain\Application\CreateDomain\CreateDomainMessage;
+use App\Controller\Shared\QueryController;
+use App\Modules\Domain\Application\CreateDomain\CreateDomainCommand;
 use App\Modules\User\Application\FindUserByCredentials\FindUserByCredentialsQuery;
 
-class FindUserByCredentialsController extends BaseController
+class LoginController extends QueryController
 {
-    public function command(): string
+    function query(): string
     {
         return FindUserByCredentialsQuery::class;
     }

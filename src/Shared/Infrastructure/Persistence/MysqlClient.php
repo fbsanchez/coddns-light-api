@@ -33,12 +33,22 @@ final class MysqlClient
         return $this->pdo->commit();
     }
 
-    public function get(string $sql): iterable
+    public function rollback(): bool
+    {
+        return $this->pdo->rollback();
+    }
+
+
+    public function get(string $sql): ?array
     {
         $queryResult = $this->pdo->query($sql);
 
-        yield $queryResult->fetch_assoc();
+        $result = $queryResult->fetch_assoc();
+        if (false === $result || null === $result) {
+            return null;
+        }
 
+        return $result;
     }
 
     public function getAll(string $sql): array

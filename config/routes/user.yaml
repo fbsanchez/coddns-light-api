@@ -1,4 +1,4 @@
 find_user:
     methods: [POST]
     path: /api/user
-    controller: App\Controller\User\FindUserByCredentialsController
+    controller: App\Controller\User\LoginController

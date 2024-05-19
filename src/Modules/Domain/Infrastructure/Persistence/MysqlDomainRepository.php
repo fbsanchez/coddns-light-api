@@ -50,4 +50,18 @@ final class MysqlDomainRepository implements DomainRepository
     {
         // TODO: Implement remove() method.
     }
+
+    public function searchByOwner(int $ownerId): array
+    {
+        $sql = sprintf(
+            'SELECT * FROM hosts WHERE oid = %d',
+            $ownerId,
+        );
+        $domains = $this->mysqlClient->getAll($sql);
+
+        return array_map(
+            static fn ($hostData) => Domain::fromArray($hostData),
+            $domains,
+        );
+    }
 }

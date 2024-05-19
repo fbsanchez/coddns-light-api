@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Application\FindUserByCredentials;
 
-use App\Shared\Domain\Message;
+use App\Shared\Domain\Query;
 
-final readonly class FindUserByCredentialsQuery implements Message
+final readonly class FindUserByCredentialsQuery implements Query
 {
 
     public function __construct(

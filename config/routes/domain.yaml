@@ -2,3 +2,8 @@ create_domain:
   methods: [ POST ]
   path: /api/domain
   controller: App\Controller\Domain\CreateDomainController
+
+search_domains:
+  methods: [ GET ]
+  path: /api/domain
+  controller: App\Controller\Domain\SearchDomainController

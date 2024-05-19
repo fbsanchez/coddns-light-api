@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Domain\Model;
 
+use App\Modules\User\Domain\Message\UserResponse;
+
 final class User
 {
     public function __construct(
         private readonly int    $id,
         private readonly string $email,
-        private readonly string $hashedPassword,
     )
     {
     }
@@ -16,9 +17,16 @@ final class User
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['id'] ?? null,
+            null === $data['id'] ? null : (int)$data['id'],
             $data['mail'] ?? null,
-            $data['pass'] ?? null,
+        );
+    }
+
+    public function toResponse(): UserResponse
+    {
+        return new UserResponse(
+            $this->id,
+            $this->email,
         );
     }
 
@@ -30,11 +38,6 @@ final class User
     public function email(): string
     {
         return $this->email;
-    }
-
-    public function hashedPassword(): string
-    {
-        return $this->hashedPassword;
     }
 
 }

@@ -3,13 +3,12 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Application\FindUserByCredentials;
 
-use App\Modules\User\Domain\Model\User;
+use App\Modules\User\Domain\Message\UserResponse;
 use App\Modules\User\Domain\Service\HashPassword;
 use App\Modules\User\Domain\UserRepository;
-use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use App\Shared\Domain\QueryHandler;
 
-#[AsMessageHandler]
-final readonly class FindUserByCredentialsQueryHandler
+final readonly class FindUserByCredentialsQueryHandler implements QueryHandler
 {
     public function __construct(
         private UserRepository $repository,
@@ -18,12 +17,12 @@ final readonly class FindUserByCredentialsQueryHandler
     {
     }
 
-    public function __invoke(FindUserByCredentialsQuery $query): ?User
+    public function __invoke(FindUserByCredentialsQuery $query): ?UserResponse
     {
         return $this->repository->findUserByEmailAndPassword(
             $query->email,
             $this->hashPassword->__invoke($query->password),
-        );
+        )?->toResponse();
     }
 
 }

@@ -16,12 +16,15 @@ services:
     App\:
         resource: '../src/'
         exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
+            - '../src/Modules/**/Domain/Message'
+            - '../src/Modules/**/Domain/Model'
             - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Shared\Domain\QueryBus:
+        class: App\Shared\Infrastructure\Bus\InMemoryQueryBus
 
     App\Shared\Infrastructure\Persistence\MysqlClient:
         arguments:
@@ -31,3 +34,7 @@ services:
             $username: 'root'
             $password: 'patata'
             $charset: 'latin1'
+
+    App\Modules\User\Domain\Service\HashPassword:
+        arguments:
+            $salt: 'MTQ1OTI1NjM3Ng=='

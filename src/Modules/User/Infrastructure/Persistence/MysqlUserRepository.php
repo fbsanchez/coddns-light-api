@@ -20,14 +20,15 @@ final class MysqlUserRepository implements UserRepository
     public function findUserByEmailAndPassword(string $email, string $password): ?User
     {
         $sql = sprintf(
-            'SELECT * FROM %s WHERE email="%s" AND PASSWORD="%s"',
+            'SELECT * FROM %s WHERE mail="%s" AND pass="%s"',
             self::TABLE,
             $this->client->escape($email),
             $this->client->escape($password),
         );
 
         // TODO: esto peta, no está funcionando el generador como me esperaba
-        while ($result = $this->client->get($sql)) {
+        $result = $this->client->get($sql);
+        if (is_array($result)) {
             return User::fromArray($result);
         }
 
