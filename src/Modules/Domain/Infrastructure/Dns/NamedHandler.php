@@ -26,9 +26,9 @@ final class NamedHandler implements DnsHandler
                     $this->domainManagementUtility,
                     $domain->domainName()->value(),
                     $domain->recordTypeId()->toString(),
-                    $domain->ip()->value(),
+                    $this->registerValue($domain),
                     $domain->ttl(),
-                    RecordTypeId::MX === $domain->recordTypeId() ? '' : self::DEFAULT_MX_PRIORITY,
+                    RecordTypeId::MX === $domain->recordTypeId()->value() ? '' : self::DEFAULT_MX_PRIORITY,
                 ),
             ),
         );
@@ -43,6 +43,15 @@ final class NamedHandler implements DnsHandler
 
     }
 
+    private function registerValue(Domain $domain): string
+    {
+        return match ($domain->recordTypeId()->value()) {
+            RecordTypeId::MX,
+            RecordTypeId::CNAME => $domain->rtag(),
+            default => $domain->ip()->value(),
+        };
+    }
+
     public function remove(Domain $domain): void
     {
         $this->validate(
@@ -50,8 +59,8 @@ final class NamedHandler implements DnsHandler
                 sprintf(
                     "%s d %s %s",
                     $this->domainManagementUtility,
+                    $domain->recordTypeId()->toString(),
                     $domain->domainName()->value(),
-                    $domain->ip()->value(),
                 ),
             ),
         );
