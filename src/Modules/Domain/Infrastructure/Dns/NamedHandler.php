@@ -59,8 +59,8 @@ final class NamedHandler implements DnsHandler
                 sprintf(
                     "%s d %s %s",
                     $this->domainManagementUtility,
-                    $domain->recordTypeId()->toString(),
                     $domain->domainName()->value(),
+                    $domain->recordTypeId()->toString(),
                 ),
             ),
         );
