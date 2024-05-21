@@ -9,9 +9,9 @@ interface DomainRepository
 {
     public function add(Domain $domain): void;
 
-    public function find(): Domain;
-
     public function findByNameAndUserId(string $fullDomainName, int $userId): ?Domain;
+
+    public function findByName(string $fullDomainName): ?Domain;
 
     public function remove(Domain $domain): void;
 

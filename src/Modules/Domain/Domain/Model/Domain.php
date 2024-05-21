@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace App\Modules\Domain\Domain\Model;
 
-use App\Modules\Domain\Domain\Model\ValueObject\DomainNameValueObject;
 use App\Modules\Domain\Domain\Model\ValueObject\Ip;
-use Safe\DateTime;
+use App\Modules\Domain\Domain\Model\ValueObject\RecordTypeId;
+use App\Modules\Shared\Domain\ValueObject\DateTimeValueObject;
+use App\Modules\Shared\Domain\ValueObject\DomainNameValueObject;
 
 final class Domain implements \JsonSerializable
 {
@@ -14,10 +15,10 @@ final class Domain implements \JsonSerializable
         private readonly int                   $userId,
         private readonly DomainNameValueObject $domainName,
         private readonly ?Ip                   $ip,
-        private readonly DateTime              $created,
-        private readonly DateTime              $lastUpdated,
+        private readonly DateTimeValueObject   $created,
+        private readonly DateTimeValueObject   $lastUpdated,
         private readonly int                   $groupId,
-        private readonly int                   $recordTypeId,
+        private readonly RecordTypeId          $recordTypeId,
         private readonly int                   $zoneId,
         private readonly int                   $ttl,
         private readonly ?string               $rtag,
@@ -32,15 +33,20 @@ final class Domain implements \JsonSerializable
             id: null === $data['id'] ? null : (int)$data['id'],
             userId: null === $data['oid'] ? null : (int)$data['oid'],
             domainName: DomainNameValueObject::create($data['tag'] ?? null),
-            ip: null === $data['ip'] ? null : Ip::fromLong((int) $data['ip']),
-            created: DateTime::createFromFormat('Y-m-d H:i:s', $data['created'] ?? null),
-            lastUpdated: DateTime::createFromFormat('Y-m-d H:i:s', $data['last_updated'] ?? null),
+            ip: null === $data['ip'] ? null : Ip::fromLong((int)$data['ip']),
+            created: DateTimeValueObject::create($data['created'] ?? null),
+            lastUpdated: DateTimeValueObject::create($data['last_updated'] ?? null),
             groupId: null === $data['gid'] ? null : (int)$data['gid'],
-            recordTypeId: null === $data['rtype'] ? null : (int)$data['rtype'],
+            recordTypeId: RecordTypeId::create((int)$data['rtype']),
             zoneId: null === $data['zone_id'] ? null : (int)$data['zone_id'],
             ttl: null === $data['ttl'] ? null : (int)$data['ttl'],
             rtag: $data['rtag'] ?? null,
         );
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return $this->toArray();
     }
 
     public function toArray(): array
@@ -50,10 +56,10 @@ final class Domain implements \JsonSerializable
             'oid'          => $this->userId(),
             'tag'          => $this->domainName()->value(),
             'ip'           => $this->ip()?->value(),
-            'created'      => $this->created()->format('Y-m-d H:i:s'),
-            'last_updated' => $this->lastUpdated()->format('Y-m-d H:i:s'),
+            'created'      => $this->created()->toString(),
+            'last_updated' => $this->lastUpdated()->toString(),
             'gid'          => $this->groupId(),
-            'rtype'        => $this->recordTypeId(),
+            'rtype'        => $this->recordTypeId()->value(),
             'zone_id'      => $this->zoneId(),
             'ttl'          => $this->ttl(),
             'rtag'         => $this->rtag(),
@@ -81,12 +87,12 @@ final class Domain implements \JsonSerializable
         return $this->ip;
     }
 
-    public function created(): DateTime
+    public function created(): DateTimeValueObject
     {
         return $this->created;
     }
 
-    public function lastUpdated(): DateTime
+    public function lastUpdated(): DateTimeValueObject
     {
         return $this->lastUpdated;
     }
@@ -96,7 +102,7 @@ final class Domain implements \JsonSerializable
         return $this->groupId;
     }
 
-    public function recordTypeId(): int
+    public function recordTypeId(): RecordTypeId
     {
         return $this->recordTypeId;
     }
@@ -114,11 +120,5 @@ final class Domain implements \JsonSerializable
     public function rtag(): ?string
     {
         return $this->rtag;
-    }
-
-
-    public function jsonSerialize(): mixed
-    {
-        return $this->toArray();
     }
 }

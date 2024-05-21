@@ -23,10 +23,10 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Shared\Domain\QueryBus:
-        class: App\Shared\Infrastructure\Bus\InMemoryQueryBus
+    App\Modules\Shared\Domain\QueryBus:
+        class: App\Modules\Shared\Infrastructure\Bus\InMemoryQueryBus
 
-    App\Shared\Infrastructure\Persistence\MysqlClient:
+    App\Modules\Shared\Infrastructure\Persistence\MysqlClient:
         arguments:
             $host: '127.0.0.1'
             $port: 3306
@@ -38,3 +38,8 @@ services:
     App\Modules\User\Domain\Service\HashPassword:
         arguments:
             $salt: 'MTQ1OTI1NjM3Ng=='
+
+
+    App\Modules\Domain\Infrastructure\Dns\NamedHandler:
+        arguments:
+            $domainManagementUtility: 'dnsmgr'

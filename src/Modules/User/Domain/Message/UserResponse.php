@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Domain\Message;
 
-use App\Shared\Domain\QueryResponse;
+use App\Modules\Shared\Domain\QueryResponse;
 
 final readonly class UserResponse implements QueryResponse
 {

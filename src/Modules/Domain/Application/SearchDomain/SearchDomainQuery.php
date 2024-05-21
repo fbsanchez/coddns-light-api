@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Domain\Application\SearchDomain;
 
-use App\Shared\Domain\Query;
+use App\Modules\Shared\Domain\Query;
 
 final class SearchDomainQuery implements Query
 {

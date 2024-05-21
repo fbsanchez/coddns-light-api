@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Infrastructure\Persistence;
 
+use App\Modules\Shared\Infrastructure\Persistence\MysqlClient;
 use App\Modules\User\Domain\Model\User;
 use App\Modules\User\Domain\UserRepository;
-use App\Shared\Infrastructure\Persistence\MysqlClient;
 
 final class MysqlUserRepository implements UserRepository
 {

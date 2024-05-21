@@ -8,7 +8,7 @@ use App\Modules\Domain\Domain\Model\ValueObject\RecordTypeId;
 
 final class AssertCnameRecordTypeHasReference
 {
-    public function __invoke(int $recordType, string $cname): void
+    public function __invoke(int $recordType, ?string $cname): void
     {
         if (
             RecordTypeId::CNAME === $recordType

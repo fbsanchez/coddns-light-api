@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Domain\Model\ValueObject;
 
+use App\Modules\Shared\Domain\ValueObject\StringValueObject;
 use App\Modules\User\Domain\Exception\InvalidUserEmailException;
-use App\Shared\Domain\ValueObject\StringValueObject;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 

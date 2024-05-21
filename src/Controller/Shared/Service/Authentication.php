@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace App\Controller\Shared\Service;
 
+use App\Modules\Shared\Domain\QueryBus;
 use App\Modules\User\Application\FindUserByCredentials\FindUserByCredentialsQuery;
 use App\Modules\User\Domain\Message\UserResponse;
 use App\Modules\User\Domain\Model\User;
-use App\Shared\Domain\QueryBus;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 final class Authentication
@@ -27,6 +27,10 @@ final class Authentication
 
         if (null !== $this->user) {
             return $this->user;
+        }
+
+        if (false === isset($email)) {
+            throw new UnauthorizedHttpException("", "Not allowed");
         }
 
         /** @var UserResponse|null $user */

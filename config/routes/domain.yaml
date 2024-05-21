@@ -1,9 +1,14 @@
 create_domain:
-  methods: [ POST ]
-  path: /api/domain
-  controller: App\Controller\Domain\CreateDomainController
+    methods: [ POST ]
+    path: /api/domain
+    controller: App\Controller\Domain\CreateDomainController
 
 search_domains:
-  methods: [ GET ]
-  path: /api/domain
-  controller: App\Controller\Domain\SearchDomainController
+    methods: [ GET ]
+    path: /api/domain
+    controller: App\Controller\Domain\SearchDomainController
+
+delete_domain_by_name:
+    methods: [ DELETE ]
+    path: /api/domain
+    controller: App\Controller\Domain\DeleteDomainByDomainNameController

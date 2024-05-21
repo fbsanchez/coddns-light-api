@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Application\FindUserByCredentials;
 
+use App\Modules\Shared\Domain\QueryHandler;
 use App\Modules\User\Domain\Message\UserResponse;
 use App\Modules\User\Domain\Service\HashPassword;
 use App\Modules\User\Domain\UserRepository;
-use App\Shared\Domain\QueryHandler;
 
 final readonly class FindUserByCredentialsQueryHandler implements QueryHandler
 {

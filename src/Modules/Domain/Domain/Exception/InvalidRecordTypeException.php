@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Domain\Domain\Exception;
 
-final class InvalidRecordTypeException extends \RuntimeException
+use App\Modules\Shared\Domain\Exception\DomainException;
+
+final class InvalidRecordTypeException extends DomainException
 {
 
 }

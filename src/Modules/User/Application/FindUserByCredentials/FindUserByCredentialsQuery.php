@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Application\FindUserByCredentials;
 
-use App\Shared\Domain\Query;
+use App\Modules\Shared\Domain\Query;
 
 final readonly class FindUserByCredentialsQuery implements Query
 {

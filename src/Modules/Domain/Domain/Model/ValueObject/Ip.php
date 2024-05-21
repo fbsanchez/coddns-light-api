@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Domain\Domain\Model\ValueObject;
 
-use App\Shared\Domain\ValueObject\StringValueObject;
+use App\Modules\Shared\Domain\ValueObject\StringValueObject;
 
 final class Ip extends StringValueObject
 {
