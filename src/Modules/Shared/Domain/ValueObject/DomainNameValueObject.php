@@ -15,7 +15,6 @@ final class DomainNameValueObject extends StringValueObject
         preg_match('/.*?\.(\w+\.\w+)/', $this->value(), $matches);
 
         return $matches[1];
-
     }
 
     /**

@@ -11,17 +11,17 @@ use App\Modules\Shared\Domain\ValueObject\DomainNameValueObject;
 final class Domain implements \JsonSerializable
 {
     public function __construct(
-        private readonly int                   $id,
-        private readonly int                   $userId,
-        private readonly DomainNameValueObject $domainName,
-        private readonly ?Ip                   $ip,
-        private readonly DateTimeValueObject   $created,
-        private readonly DateTimeValueObject   $lastUpdated,
-        private readonly int                   $groupId,
-        private readonly RecordTypeId          $recordTypeId,
-        private readonly int                   $zoneId,
-        private readonly int                   $ttl,
-        private readonly ?string               $rtag,
+        private readonly int                    $id,
+        private readonly int                    $userId,
+        private readonly DomainNameValueObject  $domainName,
+        private readonly ?Ip                    $ip,
+        private readonly DateTimeValueObject    $created,
+        private readonly DateTimeValueObject    $lastUpdated,
+        private readonly int                    $groupId,
+        private readonly RecordTypeId           $recordTypeId,
+        private readonly int                    $zoneId,
+        private readonly int                    $ttl,
+        private readonly ?DomainNameValueObject $rtag,
 
     )
     {
@@ -40,7 +40,7 @@ final class Domain implements \JsonSerializable
             recordTypeId: RecordTypeId::create((int)$data['rtype']),
             zoneId: null === $data['zone_id'] ? null : (int)$data['zone_id'],
             ttl: null === $data['ttl'] ? null : (int)$data['ttl'],
-            rtag: $data['rtag'] ?? null,
+            rtag: DomainNameValueObject::createOrNull($data['rtag'] ?? null),
         );
     }
 
@@ -62,7 +62,7 @@ final class Domain implements \JsonSerializable
             'rtype'        => $this->recordTypeId()->value(),
             'zone_id'      => $this->zoneId(),
             'ttl'          => $this->ttl(),
-            'rtag'         => $this->rtag(),
+            'rtag'         => $this->rtag()?->value(),
         ];
 
     }
@@ -117,7 +117,7 @@ final class Domain implements \JsonSerializable
         return $this->ttl;
     }
 
-    public function rtag(): ?string
+    public function rtag(): ?DomainNameValueObject
     {
         return $this->rtag;
     }

@@ -5,9 +5,22 @@ namespace App\Modules\Shared\Domain\ValueObject;
 
 abstract class ValueObject
 {
-    public function __construct()
+    final public function __construct(protected mixed $value)
     {
-        $this->assert();
+    }
+
+    protected function assert(): void
+    {
+
+    }
+
+    public static function createOrNull(mixed $value): ?static
+    {
+        if (null === $value) {
+            return null;
+        }
+
+        return self::create($value);
     }
 
     public static function create(mixed $value): static
@@ -16,9 +29,4 @@ abstract class ValueObject
     }
 
     abstract public function value(): mixed;
-
-    protected function assert(): void
-    {
-
-    }
 }

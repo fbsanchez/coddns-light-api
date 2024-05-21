@@ -40,7 +40,7 @@ trait DomainTrait
             recordTypeId: $domain->recordTypeId()->value(),
             zoneId: $domain->zoneId(),
             ttl: $domain->ttl(),
-            rtag: $domain->rtag(),
+            rtag: $domain->rtag()?->value(),
         );
     }
 
@@ -57,7 +57,7 @@ trait DomainTrait
             recordTypeId: RecordTypeId::create($this->recordTypeId),
             zoneId: $this->zoneId,
             ttl: $this->ttl,
-            rtag: $this->rtag,
+            rtag: DomainNameValueObject::createOrNull($this->rtag),
         );
     }
 

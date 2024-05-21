@@ -74,5 +74,8 @@
             "name": "Fco de Borja Sánchez",
             "email": "fborja.sanchezs@gmail.com"
         }
-    ]
+    ],
+    "require-dev": {
+        "phpstan/phpstan": "^1.11"
+    }
 }

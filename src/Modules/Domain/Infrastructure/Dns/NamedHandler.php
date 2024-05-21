@@ -28,7 +28,7 @@ final class NamedHandler implements DnsHandler
                     $domain->recordTypeId()->toString(),
                     $this->registerValue($domain),
                     $domain->ttl(),
-                    RecordTypeId::MX === $domain->recordTypeId()->value() ? '' : self::DEFAULT_MX_PRIORITY,
+                    RecordTypeId::MX === $domain->recordTypeId()->value() ? self::DEFAULT_MX_PRIORITY : '',
                 ),
             ),
         );
@@ -47,7 +47,7 @@ final class NamedHandler implements DnsHandler
     {
         return match ($domain->recordTypeId()->value()) {
             RecordTypeId::MX,
-            RecordTypeId::CNAME => $domain->rtag(),
+            RecordTypeId::CNAME => $domain->rtag()?->value(),
             default => $domain->ip()->value(),
         };
     }
