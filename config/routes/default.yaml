@@ -1,0 +1,9 @@
+_default:
+    methods: [ GET ]
+    path: /
+    controller: App\Controller\Domain\HelloWorldController
+
+_default_api:
+    methods: [ GET ]
+    path: /api
+    controller: App\Controller\Domain\HelloWorldController
