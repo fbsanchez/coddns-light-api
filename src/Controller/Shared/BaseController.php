@@ -53,7 +53,14 @@ abstract class BaseController extends AbstractController
                 throw $th;
             }
 
-            return new Response(sprintf('Error %s', $this->exceptionPrettyName($exceptionClass)), $exceptionCode);
+            return new Response(
+                sprintf(
+                    'Error %s %s',
+                    $this->exceptionPrettyName($exceptionClass),
+                    $exception->getMessage(),
+                ),
+                $exceptionCode,
+            );
         }
     }
 
