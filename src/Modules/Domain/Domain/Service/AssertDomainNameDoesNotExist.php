@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Modules\Domain\Domain\Service;
 
 use App\Modules\Domain\Domain\DomainRepository;
-use App\Modules\Domain\Domain\Exception\InvalidDomainNameException;
+use App\Modules\Domain\Domain\Exception\DomainNameAlreadyExistsException;
 use App\Modules\Shared\Domain\ValueObject\DomainNameValueObject;
 
 final class AssertDomainNameDoesNotExist
@@ -19,11 +19,11 @@ final class AssertDomainNameDoesNotExist
     {
         $result = $this->repository->findByName($domainName->value());
         if (null !== $result) {
-            throw new InvalidDomainNameException(
+            throw new DomainNameAlreadyExistsException(
                 sprintf(
                     '[%s] domain name already in use',
                     $domainName->value(),
-                )
+                ),
             );
         }
 

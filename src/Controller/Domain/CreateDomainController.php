@@ -6,6 +6,7 @@ namespace App\Controller\Domain;
 
 use App\Controller\Shared\BaseController;
 use App\Modules\Domain\Application\CreateDomain\CreateDomainCommand;
+use App\Modules\Domain\Domain\Exception\DomainNameAlreadyExistsException;
 use App\Modules\Domain\Domain\Exception\InvalidCnameAsForCnameRecordTypeException;
 use App\Modules\Domain\Domain\Exception\InvalidDomainNameException;
 use App\Modules\Domain\Domain\Exception\InvalidRecordTypeException;
@@ -32,6 +33,7 @@ class CreateDomainController extends BaseController
             InvalidDomainNameException::class                => Response::HTTP_BAD_REQUEST,
             InvalidRecordTypeException::class                => Response::HTTP_BAD_REQUEST,
             InvalidCnameAsForCnameRecordTypeException::class => Response::HTTP_BAD_REQUEST,
+            DomainNameAlreadyExistsException::class          => Response::HTTP_CONFLICT,
         ];
     }
 }
