@@ -19,7 +19,7 @@ final class AssertDomainNameDoesNotExist
     {
         $result = $this->repository->findByName($domainName->value());
         if (null !== $result) {
-            throw new InvalidDomainNameException('Domain already exists');
+            throw new InvalidDomainNameException('Domain name already in use');
         }
 
     }
