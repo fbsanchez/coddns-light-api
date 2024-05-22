@@ -10,7 +10,7 @@ use App\Modules\Domain\Domain\Model\ValueObject\Ip;
 use App\Modules\Domain\Domain\Model\ValueObject\RecordTypeId;
 use App\Modules\Domain\Domain\Service\AssertCnameRecordTypeHasReference;
 use App\Modules\Domain\Domain\Service\AssertDomainNameDoesNotExist;
-use App\Modules\Domain\Domain\Service\ValidatePublicZoneDomain;
+use App\Modules\Domain\Domain\Service\AssertZoneDomainIsPublic;
 use App\Modules\Shared\Domain\ValueObject\DateTimeValueObject;
 use App\Modules\Shared\Domain\ValueObject\DomainNameValueObject;
 use App\Modules\Shared\Domain\ValueObject\Group;
@@ -24,9 +24,9 @@ final class CreateDomainCommandHandler
     private AssertDomainNameDoesNotExist $assertDomainNameDoesNotExist;
 
     public function __construct(
-        private MessageBusInterface      $messageBus,
-        private DomainRepository         $repository,
-        private ValidatePublicZoneDomain $validatePublicZoneDomain,
+        private readonly MessageBusInterface      $messageBus,
+        private readonly DomainRepository         $repository,
+        private readonly AssertZoneDomainIsPublic $assertZoneDomainIsPublic,
     )
     {
         $this->assertCnameRecordTypeHasReference = new AssertCnameRecordTypeHasReference();
@@ -40,7 +40,7 @@ final class CreateDomainCommandHandler
         $cnameAs = DomainNameValueObject::createOrNull($command->cnameAs);
 
         $this->assertCnameRecordTypeHasReference->__invoke($recordTypeId, $cnameAs?->value());
-        $this->validatePublicZoneDomain->__invoke($domainName);
+        $this->assertZoneDomainIsPublic->__invoke($domainName);
         $this->assertDomainNameDoesNotExist->__invoke($domainName);
 
         $domain = new Domain(
