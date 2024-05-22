@@ -46,7 +46,19 @@ final class Domain implements \JsonSerializable
 
     public function jsonSerialize(): mixed
     {
-        return $this->toArray();
+        return [
+            'id'           => $this->id(),
+            'oid'          => $this->userId(),
+            'tag'          => $this->domainName()->value(),
+            'ip'           => $this->ip()?->value(),
+            'created'      => $this->created()->toString(),
+            'last_updated' => $this->lastUpdated()->toString(),
+            'gid'          => $this->groupId(),
+            'rtype'        => $this->recordTypeId()->value(),
+            'zone_id'      => $this->zoneId(),
+            'ttl'          => $this->ttl(),
+            'rtag'         => $this->rtag()?->value(),
+        ];
     }
 
     public function toArray(): array
