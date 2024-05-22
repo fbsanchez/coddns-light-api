@@ -55,7 +55,7 @@ final class Domain implements \JsonSerializable
             'id'           => $this->id(),
             'oid'          => $this->userId(),
             'tag'          => $this->domainName()->value(),
-            'ip'           => $this->ip()?->value(),
+            'ip'           => $this->ip()?->toLong(),
             'created'      => $this->created()->toString(),
             'last_updated' => $this->lastUpdated()->toString(),
             'gid'          => $this->groupId(),
