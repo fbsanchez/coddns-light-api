@@ -39,7 +39,7 @@ final class CreateDomainCommandHandler
         $domainName = DomainNameValueObject::create($command->domainName);
         $cnameAs = DomainNameValueObject::createOrNull($command->cnameAs);
 
-        $this->assertCnameRecordTypeHasReference->__invoke($recordTypeId, $cnameAs->value());
+        $this->assertCnameRecordTypeHasReference->__invoke($recordTypeId, $cnameAs?->value());
         $this->validatePublicZoneDomain->__invoke($domainName);
         $this->assertDomainNameDoesNotExist->__invoke($domainName);
 
