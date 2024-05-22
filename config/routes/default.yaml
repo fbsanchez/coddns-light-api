@@ -1,9 +1,9 @@
 _default:
     methods: [ GET ]
     path: /
-    controller: App\Controller\Domain\HelloWorldController
+    controller: App\Controller\Shared\HelloWorldController
 
 _default_api:
     methods: [ GET ]
     path: /api
-    controller: App\Controller\Domain\HelloWorldController
+    controller: App\Controller\Shared\HelloWorldController
