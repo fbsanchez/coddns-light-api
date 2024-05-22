@@ -22,6 +22,8 @@ final class DomainNameValueObject extends StringValueObject
      */
     protected function assert(): void
     {
+        $this->value = trim($this->value());
+
         if (0 === \Safe\preg_match(self::HOST_NAME_FORMAT, $this->value())) {
             throw new InvalidDomainNameException($this->value());
         }
