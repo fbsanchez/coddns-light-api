@@ -32,7 +32,7 @@ services:
             $port: 3306
             $database: 'coddns'
             $username: 'root'
-            $password: 'patata'
+            $password: 'secret'
             $charset: 'latin1'
 
     App\Modules\User\Domain\Service\HashPassword:
